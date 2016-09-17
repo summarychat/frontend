@@ -40,9 +40,14 @@
       margin: 0 auto
 
     i
+      color: $blue
       cursor: pointer
       float: right
       margin-right: 20px
+
+    .chat__summary-toggle
+      &--black
+        color: black
 
     h2, i
       line-height: 10vh
@@ -72,6 +77,13 @@
     width: 30vw
     h2
       font-size: 1.5em
+
+    .chat__summary-header
+      height: 10vh
+      h2
+        line-height: 10vh
+        text-align: center
+        text-decoration: underline
 
   &.chat--expanded-view
     width: 100vw
