@@ -1,14 +1,14 @@
-let address = '104.198.12.154';
-let socket = new WebSocket('ws://' + address + '/chatroom/user');
+const address = '104.198.12.154';
+const socket = new WebSocket('ws://' + address + '/chatroom/user');
 
-let msg = {
-    user: 'user',
-    content: 'hello world'
+const message = {
+    name: 'user',
+    msg: 'connected'
 };
 
 socket.onopen = function(event) {
   console.log('connected');
-  socket.send(JSON.stringify(msg));
+  socket.send(JSON.stringify('message'));
 }
 
 socket.onmessage = function(event) {
