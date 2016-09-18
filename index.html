@@ -45,5 +45,18 @@
   <script src="scripts/jquery.min.js"></script>
   <script src="scripts/main.js"></script>
   <script src="scripts/websocket.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.4.0/trianglify.min.js"></script>
+  <script>
+  function addTriangleTo(target) {
+    var dimensions = target.getClientRects()[0];
+    var pattern = Trianglify({
+        width: dimensions.width,
+        height: dimensions.height
+    });
+    target.style['background-image'] = 'url(' + pattern.png() + ')';
+  }
+
+  addTriangleTo(document.getElementById('landing'));
+  </script>
 </body>
 </html>
