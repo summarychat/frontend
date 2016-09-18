@@ -37,6 +37,7 @@ $(document).ready(function() {
         user: username,
         msg: message
       }
+      
       socket.send(JSON.stringify(messageJSON));
     }
 

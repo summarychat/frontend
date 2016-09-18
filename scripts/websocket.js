@@ -10,7 +10,7 @@ var usernameCheck = setInterval(function() {
 function init() {
   var username = getUsername();
   var group = getGroupID();
-  var socket = new WebSocket('ws://' + address + '/' + group + '/' + username);
+  window.socket = new WebSocket('ws://' + address + '/' + group + '/' + username);
 
   const message = {
       name: 'sumchat',
