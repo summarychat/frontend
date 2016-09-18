@@ -5,7 +5,6 @@ $(document).ready(function() {
     event.preventDefault();
     // querying username and group id
       username = $('.landing__username').val();
-      console.log(getUsername())
       groupID = $('.landing__group-id').val();
       if (groupID === '') {
         groupID = 'Group Chat';

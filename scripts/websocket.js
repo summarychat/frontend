@@ -1,24 +1,17 @@
 var username;
 var group;
+const address = '104.198.12.154';
+let socket;
 
 var usernameCheck = setInterval(function() {
-  if (getUsername()) {
+  if (getUsername() && getGroupID()) {
     clearInterval(usernameCheck);
     username = getUsername();
-  }
-}, 500);
-
-var groupCheck = setInterval(function() {
-  if (getGroupID()) {
-    clearInterval(groupCheck);
     group = getGroupID();
-    console.log(group);
+    socket = new WebSocket('ws://' + address + '/' + group + '/' + username);
   }
 }, 500);
 
-
-const address = '104.198.12.154';
-const socket = new WebSocket('ws://' + address + '/' + group + '/' + username);
 
 const message = {
     name: 'sumchat',
