@@ -62,4 +62,5 @@ function appendMessage(message, nameBool, name) {
   messageItem.appendChild(li);
   messageItem.className = 'server';
   $('.chat__messages__list').append(messageItem);
+  $('.chat__messages').scrollTop($('.chat__messages')[0].scrollHeight);
 }

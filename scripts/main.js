@@ -37,7 +37,7 @@ $(document).ready(function() {
         user: username,
         msg: message
       }
-      
+
       socket.send(JSON.stringify(messageJSON));
     }
 
@@ -53,6 +53,7 @@ $(document).ready(function() {
     messageItem.className = type;
     $('.chat__messages__list').append(messageItem);
     // scroll down here
+    $('.chat__messages').scrollTop($('.chat__messages')[0].scrollHeight);
   }
 
   $('.chat__summary-toggle').click(function() {
