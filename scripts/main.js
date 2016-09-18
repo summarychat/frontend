@@ -1,10 +1,11 @@
 $(document).ready(function() {
   let username;
+  let groupID;
   $('.landing__button').click(function() {
     event.preventDefault();
     // querying username and group id
       username = $('.landing__username').val();
-      let groupID = $('.landing__group-id').val();
+      groupID = $('.landing__group-id').val();
       if (groupID === '') {
         groupID = 'Group Chat';
       }
@@ -69,5 +70,7 @@ $(document).ready(function() {
     $('.chat__summary-toggle').toggleClass('chat__summary-toggle--black');
     $('#chat').toggleClass('chat--expanded-view');
   });
-
+  window.getUsername = function() {
+    return username;
+  }
 });

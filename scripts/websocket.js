@@ -1,3 +1,12 @@
+var username;
+var usernameCheck = setInterval(function() {
+  if (getUsername()) {
+    clearInterval(usernameCheck);
+    username = getUsername();
+  }
+}, 500);
+
+
 const address = '104.198.12.154';
 const socket = new WebSocket('ws://' + address + '/chatroom/user');
 
@@ -13,20 +22,26 @@ socket.onopen = function(event) {
 let currentUser;
 socket.onmessage = function(event) {
   let data = JSON.parse(event.data);
-  if (typeof currentUser === 'undefined') {
-    console.log('setting currentUser...');
-    currentUser = data.user;
-    console.log(currentUser);
-  }
-
-  if (currentUser === data.user) {
-    console.log('same person is talking, dont change name');
-    appendMessage(data.msg, false, data.user);
-  } else {
-    currentUser = data.user;
-    console.log('diff person is talking, change the name');
-    appendMessage(data.msg, true, data.user)
-  }
+  let user = data.user;
+  // if current user doesn't exist then one is created
+    if (typeof currentUser === 'undefined') {
+      currentUser = user;
+      console.log('current user:', currentUser);
+      if (username !== user) {
+        appendMessage(data.msg, true, currentUser);
+      }
+    } else if (currentUser === user) {
+      console.log('same person is talking, dont change name');
+      if (username !== user) {
+        appendMessage(data.msg, false, user);
+      }
+    } else {
+      currentUser = user;
+      console.log('diff person is talking, change the name');
+      if (username !== user) {
+        appendMessage(data.msg, true, user)
+      }
+    }
 }
 
 function appendMessage(message, nameBool, name) {
@@ -36,7 +51,7 @@ function appendMessage(message, nameBool, name) {
     nameParagraph.innerText = name;
     messageItem.appendChild(nameParagraph);
   }
-  
+
   const li = document.createElement('li');
   li.innerText = message;
   messageItem.appendChild(li);
