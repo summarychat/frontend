@@ -5,6 +5,7 @@ $(document).ready(function() {
     event.preventDefault();
     // querying username and group id
       username = $('.landing__username').val();
+      console.log(getUsername())
       groupID = $('.landing__group-id').val();
       if (groupID === '') {
         groupID = 'Group Chat';
@@ -30,7 +31,6 @@ $(document).ready(function() {
   });
 
   function messageSubmit(event, message) {
-    console.log(message);
     if (message !== '') {
       appendMessage(message, 'client');
 
@@ -70,7 +70,12 @@ $(document).ready(function() {
     $('.chat__summary-toggle').toggleClass('chat__summary-toggle--black');
     $('#chat').toggleClass('chat--expanded-view');
   });
+
   window.getUsername = function() {
     return username;
+  }
+
+  window.getGroupID = function() {
+    return groupID;
   }
 });

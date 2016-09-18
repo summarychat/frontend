@@ -1,4 +1,6 @@
 var username;
+var group;
+
 var usernameCheck = setInterval(function() {
   if (getUsername()) {
     clearInterval(usernameCheck);
@@ -6,9 +8,17 @@ var usernameCheck = setInterval(function() {
   }
 }, 500);
 
+var groupCheck = setInterval(function() {
+  if (getGroupID()) {
+    clearInterval(groupCheck);
+    group = getGroupID();
+    console.log(group);
+  }
+}, 500);
+
 
 const address = '104.198.12.154';
-const socket = new WebSocket('ws://' + address + '/chatroom/user');
+const socket = new WebSocket('ws://' + address + '/' + group + '/' + username);
 
 const message = {
     name: 'sumchat',
