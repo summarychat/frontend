@@ -1,6 +1,7 @@
 #landing
   align-items: center
   display: flex
+  background-size: cover
   font-weight: 300
   flex-direction: column
   height: 100vh
@@ -27,7 +28,7 @@
 
 #chat
   display: none
-  width: 70vw
+  width: 75vw
 
   .chat__header
     border-bottom: 1px solid grey
@@ -74,16 +75,50 @@
     position: fixed
     right: 0
     top: 0
-    width: 30vw
+    width: 25vw
     h2
       font-size: 1.5em
 
     .chat__summary-header
+      display: block
       height: 10vh
       h2
+        display: block
         line-height: 10vh
         text-align: center
         text-decoration: underline
+      .chat__summary-toggle--mobile-view
+        display: none
 
   &.chat--expanded-view
     width: 100vw
+
+@media screen and (max-width: 900px)
+  #chat
+    position: relative
+    width: 100vw
+    .chat__summary-toggle--desktop-view
+      display: none
+
+    .chat__summary
+      border: 1px solid grey
+      height: 90vh
+      left: 50%
+      position: absolute
+      transform: translateX(-50%)
+      width: 90vw
+      top: 0
+      bottom: 0
+      margin: auto
+      .chat__summary-header
+        display: flex
+        h2
+          display: inline-block
+          margin: 0 auto
+        .chat__summary-toggle--mobile-view
+          color: $blue
+          cursor: pointer
+          display: block
+          float: right
+          line-height: 10vh
+          margin-right: 20px

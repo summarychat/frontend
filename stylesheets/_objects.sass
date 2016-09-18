@@ -29,7 +29,7 @@ input
       display: inline-block
       font-size: 1.3em
       font-weight: 300
-      margin-top: 3px
+      margin: 3px 0
       padding: 0.2em 1em
 
 .client
@@ -37,7 +37,11 @@ input
   float: right
   margin-right: 10px
 
-.server
-  clear: both
-  float: left
-  margin-left: 10px
+.chat__messages__list
+  .server
+    color: $black
+    clear: both
+    float: left
+    margin-left: 10px
+    li
+      background: grey

@@ -1,8 +1,9 @@
 $(document).ready(function() {
+  let username;
   $('.landing__button').click(function() {
     event.preventDefault();
     // querying username and group id
-      const username = $('.landing__username').val();
+      username = $('.landing__username').val();
       let groupID = $('.landing__group-id').val();
       if (groupID === '') {
         groupID = 'Group Chat';
@@ -33,7 +34,7 @@ $(document).ready(function() {
       appendMessage(message, 'client');
 
       const messageJSON = {
-        name: 'username',
+        name: username,
         msg: message
       }
       socket.send(JSON.stringify(messageJSON));
@@ -50,9 +51,20 @@ $(document).ready(function() {
     messageItem.appendChild(li);
     messageItem.className = type;
     $('.chat__messages__list').append(messageItem);
+    // scroll down here
   }
 
   $('.chat__summary-toggle').click(function() {
+    if ($(window).width() < 900) {
+      $('.chat__summary-toggle').toggle();
+    }
+    $('.chat__summary').toggle();
+    $('.chat__summary-toggle').toggleClass('chat__summary-toggle--black');
+    $('#chat').toggleClass('chat--expanded-view');
+  });
+
+  $('.chat__summary-toggle--mobile-view').click(function() {
+    $('.chat__summary-toggle').toggle();
     $('.chat__summary').toggle();
     $('.chat__summary-toggle').toggleClass('chat__summary-toggle--black');
     $('#chat').toggleClass('chat--expanded-view');

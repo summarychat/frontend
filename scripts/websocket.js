@@ -7,30 +7,39 @@ const message = {
 };
 
 socket.onopen = function(event) {
-  socket.send(JSON.stringify(message));
+  console.log('connected');
 }
 
-
+let currentUser;
 socket.onmessage = function(event) {
   let data = JSON.parse(event.data);
   if (typeof currentUser === 'undefined') {
     console.log('setting currentUser...');
-    let currentUser = data.name
+    currentUser = data.user;
+    console.log(currentUser);
   }
 
-  if (currentUser === data.name) {
-    console.log('current user is still messaging, (dont update name)');
+  if (currentUser === data.user) {
+    console.log('same person is talking, dont change name');
+    appendMessage(data.msg, false, data.user);
   } else {
-    console.log('execute appendMessage fnc with special attribute that allows the injection of new name');
+    currentUser = data.user;
+    console.log('diff person is talking, change the name');
+    appendMessage(data.msg, true, data.user)
   }
-  appendMessage(data.msg, 'server');
 }
 
-function appendMessage(message, type) {
+function appendMessage(message, nameBool, name) {
   const messageItem = document.createElement('div');
+  if (nameBool) {
+    const nameParagraph = document.createElement('p');
+    nameParagraph.innerText = name;
+    messageItem.appendChild(nameParagraph);
+  }
+  
   const li = document.createElement('li');
   li.innerText = message;
   messageItem.appendChild(li);
-  messageItem.className = type;
+  messageItem.className = 'server';
   $('.chat__messages__list').append(messageItem);
 }
