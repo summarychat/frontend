@@ -35,21 +35,22 @@ socket.onmessage = function(event) {
   let user = data.user;
   // if current user doesn't exist then one is created
     if (typeof currentUser === 'undefined') {
-      currentUser = user;
+      // currentUser is the user that websockets is sending
+        currentUser = user;
       console.log('current user:', currentUser);
-      if (username !== user) {
+      if (username !== currentUser) {
         appendMessage(data.msg, true, currentUser);
       }
     } else if (currentUser === user) {
       console.log('same person is talking, dont change name');
-      if (username !== user) {
-        appendMessage(data.msg, false, user);
+      if (username !== currentUser) {
+        appendMessage(data.msg, false);
       }
     } else {
       currentUser = user;
       console.log('diff person is talking, change the name');
-      if (username !== user) {
-        appendMessage(data.msg, true, user)
+      if (username !== currentUser) {
+        appendMessage(data.msg, true, currentUser)
       }
     }
 }
@@ -64,6 +65,7 @@ function appendMessage(message, nameBool, name) {
 
   const li = document.createElement('li');
   li.innerText = message;
+  console.log(message);
   messageItem.appendChild(li);
   messageItem.className = 'server';
   $('.chat__messages__list').append(messageItem);

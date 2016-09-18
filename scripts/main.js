@@ -35,7 +35,7 @@ $(document).ready(function() {
       appendMessage(message, 'client');
 
       const messageJSON = {
-        name: username,
+        user: username,
         msg: message
       }
       socket.send(JSON.stringify(messageJSON));
