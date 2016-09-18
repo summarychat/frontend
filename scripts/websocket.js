@@ -1,6 +1,6 @@
 const address = '104.198.12.154';
 
-var usernameCheck = setInterval(function() {
+let usernameCheck = setInterval(function() {
   if (getUsername() && getGroupID()) {
     clearInterval(usernameCheck);
     init();
@@ -8,9 +8,40 @@ var usernameCheck = setInterval(function() {
 }, 500);
 
 function init() {
-  var username = getUsername();
-  var group = getGroupID();
+  let username = getUsername();
+  let group = getGroupID();
   window.socket = new WebSocket('ws://' + address + '/' + group + '/' + username);
+
+  $.get('ip/events/' + group, function (data){
+    for (let i = 0; i < data.length; i++) {
+      let sumName = data[i].name;
+      let sumMessage = data[i].message;
+
+      appendSummary(sumMessage, sumName)
+    }
+  });
+
+  $.get('ip/messages/' + group, function (data){
+    for (let i = 0; i < data.length; i++) {
+      let messagesName = data[i].name;
+      let messagesMessage = data[i].message;
+
+      appendMessage(messagesMessage, true, messagesName);
+    }
+  });
+
+  function appendSummary(message, user) {
+    const summaryItem = document.createElement('div');
+    const nameParagraph = document.createElement('p');
+    nameParagraph.innerText = name;
+    summaryItem.appendChild(nameParagraph);
+    const li = document.createElement('li');
+    li.innerText = message;
+    summaryItem.appendChild(li);
+    summaryItem.className = 'server';
+    $('.chat__summary__list').append(messageItem);
+    $('.chat__summary').scrollTop($('.chat__summary')[0].scrollHeight);
+  }
 
   const message = {
       name: 'sumchat',
