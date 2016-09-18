@@ -33,7 +33,7 @@ function init() {
     }
   });
 
-  function appendSummary(message, user) {
+  function appendSummary(message, name) {
     const summaryItem = document.createElement('div');
     const nameParagraph = document.createElement('p');
     nameParagraph.innerText = name;
@@ -41,8 +41,9 @@ function init() {
     const li = document.createElement('li');
     li.innerText = message;
     summaryItem.appendChild(li);
+    summaryItem.className = 'chat__summary__list__item';
     $('.chat__summary__list').append(summaryItem);
-    $('.chat__summary').scrollTop($('.chat__summary')[0].scrollHeight);
+    $('.chat__summary__list-container').scrollTop($('.chat__summary__list-container')[0].scrollHeight);
   }
 
   const message = {
